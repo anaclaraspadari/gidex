@@ -3,6 +3,10 @@ const { DataTypes, Model }=require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
 
 const { Usuario }=require('./usuarios-model');
+const { Arma }=require('./armas-model');
+const { Elemento }=require('./elementos-model');
+const { Nacao }=require('./nacoes-model');
+const { Talento }=require('./talentos-model');
 
 class Personagem extends Model{}
 
@@ -20,7 +24,7 @@ Personagem.init({
 }, { 
     sequelize: sequelizeCon, 
     schema: 'public',
-    modelName: 'personagems',
+    modelName: 'personagem',
     createdAt: false,
     updatedAt: false
 });
@@ -30,4 +34,4 @@ const colecao=sequelizeCon.define('colecao',{},{timestamps:false});
 Personagem.belongsToMany(Usuario, {through: colecao}, {onDelete: 'CASCADE'});
 Usuario.belongsToMany(Personagem, {through: colecao}, {onDelete: 'CASCADE'});
 
-module.exports={ Personagem }
+module.exports={ Personagem, colecao }
