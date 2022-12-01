@@ -4,7 +4,7 @@ const { Usuario } = require('../models/usuarios-model');
 const usuarioSchema=Joi.object({
     email: Joi.string().email().required(),
     nome: Joi.string().min(3).max(30).required(),
-    senha: Joi.string().pattern(new RegExp('^[a-zA-Z0-9]{6,30}$')).required()
+    senha: Joi.string().pattern(new RegExp('^[a-z]')).required()
 });
 
 const authUsuarioSchema=Joi.object({

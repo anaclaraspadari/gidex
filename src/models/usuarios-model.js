@@ -1,6 +1,8 @@
 const { DataTypes, Model } = require('sequelize');
-
+const { Personagem } = require("./personagens-model");
 const { sequelizeCon } = require('../config/db-config');
+
+
 
 class Usuario extends Model {}
     
@@ -30,7 +32,17 @@ Usuario.init({
     updatedAt: false
 });
 
+const Personagens_Usuarios = sequelizeCon.define('Personagens_Usuarios', {
+    id: { 
+        type: DataTypes.STRING,
+        primaryKey: true,
+        autoIncrement: false
+    }
+  },
+{ timestamps: false });
 
 
-// sequelizeCon.sync({ force: true });
-module.exports = { Usuario };
+
+
+//sequelizeCon.sync({ force: true });
+module.exports = { Usuario, Personagens_Usuarios };

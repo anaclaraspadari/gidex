@@ -1,7 +1,7 @@
 const { DataTypes, Model }=require('sequelize');
 
 const { sequelizeCon } = require('../config/db-config');
-const { Personagem } = require('./personagens-model');
+
 
 class Elemento extends Model{}
 
@@ -20,7 +20,4 @@ Elemento.init({
     updatedAt: false
 });
 
-Personagem.belongsTo(Elemento);
-Elemento.hasMany(Personagem, {onDelete: 'CASCADE'});
-
-module.exports={ Elemento }
+module.exports={ Elemento };

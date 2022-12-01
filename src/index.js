@@ -1,3 +1,5 @@
+const sync = require('./models/sync');
+
 const express=require('express');
 const app=express();
 
@@ -12,6 +14,7 @@ app.get('/', (req, res) => {
     });
   
 });
+
 
 const usuariosRouter = require('./routes/usuarios-route');
 app.use('/usuarios', usuariosRouter);

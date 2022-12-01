@@ -3,22 +3,20 @@ const { DataTypes, Model }=require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
 
 
-class Talento extends Model{}
+class Estrela extends Model{}
 
-Talento.init({
+Estrela.init({
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
-    },
-    nome: DataTypes.STRING
+    }
 }, { 
     sequelize: sequelizeCon, 
     schema: 'public',
-    modelName: 'talentos',
+    modelName: 'estrela',
     createdAt: false,
     updatedAt: false
 });
 
-
-module.exports={ Talento };
+module.exports={ Estrela };
