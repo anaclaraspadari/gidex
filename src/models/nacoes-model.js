@@ -1,9 +1,7 @@
-const { DataTypes, Model }=require('sequelize');
-
+const { DataTypes, Model } = require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
 
-
-class Nacao extends Model{}
+class Nacao extends Model {}
 
 Nacao.init({
     id: {
@@ -12,8 +10,8 @@ Nacao.init({
         autoIncrement: true
     },
     nome: DataTypes.STRING
-}, { 
-    sequelize: sequelizeCon, 
+}, {
+    sequelize: sequelizeCon,
     schema: 'public',
     modelName: 'nacaos',
     createdAt: false,
@@ -22,4 +20,4 @@ Nacao.init({
 
 ;
 
-module.exports={ Nacao };
+module.exports = { Nacao };

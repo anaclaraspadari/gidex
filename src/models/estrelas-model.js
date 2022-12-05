@@ -1,9 +1,7 @@
-const { DataTypes, Model }=require('sequelize');
-
+const { DataTypes, Model } = require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
 
-
-class Estrela extends Model{}
+class Estrela extends Model {}
 
 Estrela.init({
     id: {
@@ -11,12 +9,12 @@ Estrela.init({
         primaryKey: true,
         autoIncrement: true
     }
-}, { 
-    sequelize: sequelizeCon, 
+}, {
+    sequelize: sequelizeCon,
     schema: 'public',
     modelName: 'estrela',
     createdAt: false,
     updatedAt: false
 });
 
-module.exports={ Estrela };
+module.exports = { Estrela };

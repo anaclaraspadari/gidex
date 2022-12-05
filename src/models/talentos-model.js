@@ -1,9 +1,7 @@
-const { DataTypes, Model }=require('sequelize');
-
+const { DataTypes, Model } = require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
 
-
-class Talento extends Model{}
+class Talento extends Model {}
 
 Talento.init({
     id: {
@@ -12,8 +10,8 @@ Talento.init({
         autoIncrement: true
     },
     nome: DataTypes.STRING
-}, { 
-    sequelize: sequelizeCon, 
+}, {
+    sequelize: sequelizeCon,
     schema: 'public',
     modelName: 'talentos',
     createdAt: false,
@@ -21,4 +19,4 @@ Talento.init({
 });
 
 
-module.exports={ Talento };
+module.exports = { Talento };

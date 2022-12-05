@@ -1,7 +1,7 @@
 const { Usuario } = require('../models/usuarios-model')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const {validateUsuario, validateAuthUsuario, validateUpdateUsuario, validateGetListaUsuarios}=require('../validators/usuarios-validator');
+const { validateUsuario, validateAuthUsuario, validateUpdateUsuario, validateGetListaUsuarios } = require('../validators/usuarios-validator');
 
 class UsuariosController {
 
@@ -9,45 +9,46 @@ class UsuariosController {
 
     async create(req, res) {
 
-        const userBody=req.body;
-        const senha=bcrypt.hashSync(userBody.senha,10);
+        const userBody = req.body;
+        const senha = bcrypt.hashSync(userBody.senha, 10);
 
-        try{
-            
-            const invalido=await validateUsuario(userBody);
-            if(invalido){
-                throw{
-                    status:400,
-                    message:invalido.details[0].message
+        try {
+
+            const invalido = await validateUsuario(userBody);
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
                 }
             }
-            const usuario={
+            const usuario = {
                 email: userBody.email,
                 nome: userBody.nome,
-                senha
+                senha,
+                img: userBody.img
             }
 
             await Usuario.create(usuario);
             console.log(usuario);
             return res.status(200).json(usuario);
 
-        }catch(err){
-            return res.status(500).json({msg: err.message});
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
         }
 
     }
 
     async auth(req, res) {
-        
+
         const { email, senha } = req.body;
 
-        try{
+        try {
 
-            const invalido=await validateAuthUsuario({email,senha});
-            if(invalido){
-                throw{
-                    status:400,
-                    message:invalido.details[0].message
+            const invalido = await validateAuthUsuario({ email, senha });
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
                 }
             }
 
@@ -56,13 +57,13 @@ class UsuariosController {
                     email
                 }
             });
-            const verifica=bcrypt.compareSync(senha, user.senha);
+            const verifica = bcrypt.compareSync(senha, user.senha);
 
-            if(!verifica){
+            if (!verifica) {
 
-                throw{
-                    status:401,
-                    message:'Senha invalida'
+                throw {
+                    status: 401,
+                    message: 'Senha invalida'
                 }
 
             }
@@ -70,8 +71,8 @@ class UsuariosController {
             // const meuJwt = jwt.sign(user.dataValues, 'SECRET NAO PODERIA ESTAR HARDCODED')
             // return res.status(200).json(meuJwt);
 
-        }catch(err){
-            return res.status(500).json({msg: err.message});
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
         }
     }
 
@@ -81,7 +82,7 @@ class UsuariosController {
     }
 
     async profile(req, res) {
-        res.json({ user: req.user});
+        res.json({ user: req.user });
     }
 }
 

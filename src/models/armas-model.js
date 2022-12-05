@@ -1,7 +1,5 @@
-const { DataTypes, Model }=require('sequelize');
-
+const { DataTypes, Model } = require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
-
 
 class Arma extends Model {}
 
@@ -12,8 +10,8 @@ Arma.init({
         autoIncrement: true
     },
     nome: DataTypes.STRING
-}, { 
-    sequelize: sequelizeCon, 
+}, {
+    sequelize: sequelizeCon,
     schema: 'public',
     modelName: 'armas',
     createdAt: false,
@@ -21,4 +19,4 @@ Arma.init({
 })
 
 
-module.exports={ Arma };
+module.exports = { Arma };

@@ -3,9 +3,8 @@ const { Personagem } = require("./personagens-model");
 const { sequelizeCon } = require('../config/db-config');
 
 
-
 class Usuario extends Model {}
-    
+
 Usuario.init({
     // id:{
     //     type: DataTypes.STRING,
@@ -19,13 +18,13 @@ Usuario.init({
     },
     nome: DataTypes.STRING,
     senha: DataTypes.STRING,
-    img: DataTypes.STRING,
+    //img: DataTypes.STRING,
     ativo: {
         type: DataTypes.BOOLEAN,
-        defaultValue:true
+        defaultValue: true
     }
-}, { 
-    sequelize: sequelizeCon, 
+}, {
+    sequelize: sequelizeCon,
     schema: 'public',
     modelName: 'usuarios',
     createdAt: false,
@@ -33,13 +32,12 @@ Usuario.init({
 });
 
 const Personagens_Usuarios = sequelizeCon.define('Personagens_Usuarios', {
-    id: { 
+    id: {
         type: DataTypes.STRING,
         primaryKey: true,
         autoIncrement: false
     }
-  },
-{ timestamps: false });
+}, { timestamps: false });
 
 
 

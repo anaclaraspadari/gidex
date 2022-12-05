@@ -1,10 +1,7 @@
-const { DataTypes, Model }=require('sequelize');
-
+const { DataTypes, Model } = require('sequelize');
 const { sequelizeCon } = require('../config/db-config');
 
-
-
-class Personagem extends Model{}
+class Personagem extends Model {}
 
 Personagem.init({
     id: {
@@ -17,15 +14,15 @@ Personagem.init({
     constelacao: DataTypes.STRING,
     aniversario: DataTypes.STRING,
     foto: DataTypes.STRING
-}, { 
-    sequelize: sequelizeCon, 
+}, {
+    sequelize: sequelizeCon,
     schema: 'public',
     modelName: 'personagem',
     createdAt: false,
     updatedAt: false
 });
 
-const colecao=sequelizeCon.define('colecao',{},{timestamps:false});
+const colecao = sequelizeCon.define('colecao', {}, { timestamps: false });
 
 
-module.exports={ Personagem, colecao };
+module.exports = { Personagem, colecao };

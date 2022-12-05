@@ -1,7 +1,7 @@
 const sync = require('./models/sync');
 
-const express=require('express');
-const app=express();
+const express = require('express');
+const app = express();
 
 app.use(express.json());
 
@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
             version: '0.0.1-SNAPSHOT'
         },
     });
-  
+
 });
 
 
