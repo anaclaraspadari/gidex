@@ -1,4 +1,4 @@
-const { Usuario } = require('../models/usuarios-model')
+const { Usuario, Personagens_Usuarios } = require('../models/usuarios-model')
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { validateUsuario, validateAuthUsuario, validateUpdateUsuario, validateGetListaUsuarios } = require('../validators/usuarios-validator');
@@ -44,19 +44,15 @@ class UsuariosController {
 
         try {
 
-            const invalido = await validateAuthUsuario({ email, senha });
+            /*const invalido = await validateAuthUsuario({ email, senha });
             if (invalido) {
                 throw {
                     status: 400,
                     message: invalido.details[0].message
                 }
-            }
+            }*/
 
-            const user = await Usuario.findOne({
-                where: {
-                    email
-                }
-            });
+            const user = await Usuario.findByPk(email);
             const verifica = bcrypt.compareSync(senha, user.senha);
 
             if (!verifica) {
@@ -69,7 +65,7 @@ class UsuariosController {
             }
 
             // const meuJwt = jwt.sign(user.dataValues, 'SECRET NAO PODERIA ESTAR HARDCODED')
-            // return res.status(200).json(meuJwt);
+            return res.status(200).json(user);
 
         } catch (err) {
             return res.status(500).json({ msg: err.message });
@@ -77,12 +73,32 @@ class UsuariosController {
     }
 
     async list(req, res) {
-        const users = await Usuario.findAndCountAll();
+
+        const users = await Usuario.findAndCountAll(req.body);
         res.json(users);
     }
 
+
     async profile(req, res) {
         res.json({ user: req.user });
+    }
+
+
+    async deletePersonagensUsuarios(req, res) {
+        Personagens_Usuarios.destroy({
+            where: {
+                usuarioEmail: req.params.email,
+                personagemId: req.params.id
+            }
+        }).then(function(deleted) {
+            if (deleted === 1) {
+                res.status(200).json({ msg: "Personagem Deletado" });
+            } else {
+                res.status(404).json({ msg: "Falha ao deletar" });
+            }
+        }).catch(err => {
+            res.status(500).json("Nao foi possivel concluir a operacao");
+        })
     }
 }
 
