@@ -38,11 +38,7 @@ class ElementosController {
             //         message: invalido.details[0].message
             //     }
             // }
-            const elemento = await Elemento.findOne({
-                where: {
-                    id: id
-                }
-            })
+            const elemento = await Elemento.findByPk(id);
             res.status(200).json(elemento);
         } catch (err) {
             return res.status(400).json({ err });
