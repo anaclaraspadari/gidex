@@ -5,7 +5,7 @@ const { Nacao } = require('./src/models/nacoes-model');
 const { Talento } = require('./src/models/talentos-model');
 const { Estrela } = require("./src/models/estrelas-model");
 const { Usuario, Personagens_Usuarios } = require('./src/models/usuarios-model');
-const { sequelizeCon } = require("../config/db-config");
+const { sequelizeCon } = require("./src/config/db-config");
 
 
 Personagem.belongsTo(Elemento);

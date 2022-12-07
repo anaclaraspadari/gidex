@@ -57,13 +57,13 @@ class ArmasController {
     async detail(req, res) {
         try {
             const { id } = req.params;
-            const invalido = await validateGetPersonagem({ id });
-            if (invalido) {
-                throw {
-                    status: 400,
-                    message: invalido.details[0].message
-                }
-            }
+            // const invalido = await validateGetPersonagem({ id });
+            // if (invalido) {
+            //     throw {
+            //         status: 400,
+            //         message: invalido.details[0].message
+            //     }
+            // }
             const personagem = await Personagem.findOne({
                 where: {
                     id: id

@@ -30,13 +30,13 @@ class TalentosController{
     async detail(req, res){
         try{
             const {id}=req.params;
-            const invalido=await validateGetTalento({id});
-            if(invalido){
-                throw{
-                    status:400,
-                    message:invalido.details[0].message
-                }
-            }
+            // const invalido=await validateGetTalento({id});
+            // if(invalido){
+            //     throw{
+            //         status:400,
+            //         message:invalido.details[0].message
+            //     }
+            // }
             const talento=await Talento.findOne({
                 where:{
                     id: id

@@ -30,18 +30,14 @@ class NacoesController{
     async detail(req, res){
         try{
             const {id}=req.params;
-            const invalido=await validateGetNacao({id});
-            if(invalido){
-                throw{
-                    status:400,
-                    message:invalido.details[0].message
-                }
-            }
-            const nacao=await Nacao.findOne({
-                where:{
-                    id: id
-                }
-            })
+            // const invalido=await validateGetNacao({id});
+            // if(invalido){
+            //     throw{
+            //         status:400,
+            //         message:invalido.details[0].message
+            //     }
+            // }
+            const nacao=await Nacao.findByPk(id);
             res.status(200).json(nacao);
         }catch(err){
             return res.status(400).json({err});
