@@ -34,4 +34,7 @@ app.use('/talentos', talentosRouter);
 const personagensRouter = require('./routes/personagens-route');
 app.use('/personagens', personagensRouter);
 
+const colecoesRouter = require('./routes/colecoes-route');
+app.use('/colecoes', colecoesRouter);
+
 app.listen(3030, () => console.log("Listening at 3030"));
