@@ -30,14 +30,14 @@ class ElementosController {
 
     async detail(req, res) {
         try {
-            const { id } = req.params;
-            const invalido = await validateGetElemento({ id });
-            if (invalido) {
-                throw {
-                    status: 400,
-                    message: invalido.details[0].message
-                }
-            }
+            // const { id } = req.params;
+            // const invalido = await validateGetElemento({ id });
+            // if (invalido) {
+            //     throw {
+            //         status: 400,
+            //         message: invalido.details[0].message
+            //     }
+            // }
             const elemento = await Elemento.findOne({
                 where: {
                     id: id

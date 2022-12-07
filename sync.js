@@ -1,10 +1,10 @@
-const { Elemento } = require("./elementos-model");
-const { Personagem, colecao } = require("./personagens-model");
-const { Arma } = require('./armas-model');
-const { Nacao } = require('./nacoes-model');
-const { Talento } = require('./talentos-model');
-const { Estrela } = require("./estrelas-model");
-const { Usuario, Personagens_Usuarios } = require('./usuarios-model');
+const { Elemento } = require("./src/models/elementos-model");
+const { Personagem, colecao } = require("./src/models/personagens-model");
+const { Arma } = require('./src/models/armas-model');
+const { Nacao } = require('./src/models/nacoes-model');
+const { Talento } = require('./src/models/talentos-model');
+const { Estrela } = require("./src/models/estrelas-model");
+const { Usuario, Personagens_Usuarios } = require('./src/models/usuarios-model');
 const { sequelizeCon } = require("../config/db-config");
 
 
