@@ -53,7 +53,7 @@ class UsuariosController {
             }*/
 
             const user = await Usuario.findByPk(email, {
-                attributes: ['email','nome']
+                attributes: ['email','nome', "senha"]
             });
 
             if(!user) {
@@ -65,7 +65,6 @@ class UsuariosController {
 
             }
  
-            console.log(user)
 
             const verifica = bcrypt.compareSync(senha, user.senha);
 
@@ -78,8 +77,11 @@ class UsuariosController {
  
             }
 
-            // const meuJwt = jwt.sign(user.dataValues, 'SECRET NAO PODERIA ESTAR HARDCODED')
-            return res.status(200).json(user);
+            delete user.dataValues.senha
+
+            const meuJwt = jwt.sign(user.dataValues.email, 'SECRET NAO PODERIA ESTAR HARDCODED K');
+   
+            return res.status(200).json({...user.dataValues, token: meuJwt});
 
         } catch (err) {
             return res.status(500).json({ msg: err.message });
