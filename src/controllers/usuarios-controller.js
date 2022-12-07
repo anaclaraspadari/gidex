@@ -52,7 +52,21 @@ class UsuariosController {
                 }
             }*/
 
-            const user = await Usuario.findByPk(email);
+            const user = await Usuario.findByPk(email, {
+                attributes: ['email','nome']
+            });
+
+            if(!user) {
+
+                throw {
+                    status: 401,
+                    message: 'Usuario não encontrado'
+                }
+
+            }
+ 
+            console.log(user)
+
             const verifica = bcrypt.compareSync(senha, user.senha);
 
             if (!verifica) {
@@ -61,7 +75,7 @@ class UsuariosController {
                     status: 401,
                     message: 'Senha invalida'
                 }
-
+ 
             }
 
             // const meuJwt = jwt.sign(user.dataValues, 'SECRET NAO PODERIA ESTAR HARDCODED')
