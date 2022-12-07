@@ -1,4 +1,4 @@
-const sync = require('./../sync');
+const sync = require('./models/sync');
 
 const express = require('express');
 const app = express();

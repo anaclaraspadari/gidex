@@ -57,24 +57,23 @@ class ArmasController {
     async detail(req, res) {
         try {
             const { id } = req.params;
-            // const invalido = await validateGetPersonagem({ id });
-            // if (invalido) {
-            //     throw {
-            //         status: 400,
-            //         message: invalido.details[0].message
-            //     }
-            // }
-            const personagem = await Personagem.findOne({
-                where: {
-                    id: id
-                },
+            /*const invalido = await validateGetPersonagem({ id });
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
+                }
+            }*/
+            const personagem = await Personagem.findByPk(id, {
                 include: [
                     { model: Arma },
                     { model: Elemento },
                     { model: Nacao },
                     { model: Talento }
-                ]
-            })
+                ],
+                limit: 10,
+                offset: 0
+            });
             res.status(200).json(personagem);
         } catch (err) {
             return res.status(400).json({ err });

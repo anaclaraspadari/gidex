@@ -30,7 +30,8 @@ class ArmasController {
 
     async detail(req, res) {
         try {
-            /*const { id } = req.params;
+            const { id } = req.params;
+            /*
             const invalido = await validateGetArma({ id });
             if (invalido) {
                 throw {
@@ -38,13 +39,10 @@ class ArmasController {
                     message: invalido.details[0].message
                 }
             }*/
-            const { id } = req.params;
-            //const { nome } = req.query;
 
             const arma = await Arma.findByPk(id);
             res.status(200).json(arma);
         } catch (err) {
-            console.log(arma);
             return res.status(400).json({ err });
 
         }

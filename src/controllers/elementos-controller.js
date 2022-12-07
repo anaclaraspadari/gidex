@@ -30,15 +30,15 @@ class ElementosController {
 
     async detail(req, res) {
         try {
-            // const { id } = req.params;
-            // const invalido = await validateGetElemento({ id });
-            // if (invalido) {
-            //     throw {
-            //         status: 400,
-            //         message: invalido.details[0].message
-            //     }
-            // }
-            const elemento = await Elemento.findByPk(id);
+            const { id } = req.params;
+            /*const invalido = await validateGetElemento({ id });
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
+                }
+            }*/
+            const elemento = await Elemento.findByPk(id)
             res.status(200).json(elemento);
         } catch (err) {
             return res.status(400).json({ err });
