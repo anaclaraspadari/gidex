@@ -5,7 +5,7 @@ DROP TABLE nacao;
 DROP TABLE personagens;
 DROP TABLE usuarios;
 DROP TABLE personagens_usuarios;
-DROP TABLE estrela;
+DROP TABLE estrelas;
 
 
 CREATE TABLE elementos (
@@ -75,12 +75,8 @@ CREATE TABLE personagens (
     nome text not null,
     raridade varchar(1) CHECK (raridade='4' or raridade='5'),
     constelacao text not null,
-    aniver text not null,
-    foto text,
-    id_ele int not null,
-    id_arm int not null,
-    id_tal int not null,
-    id_nacao int not null,
+    aniver text not null,Usuario.belongsToMany(Estrela, { through: Personagens_Usuarios }, { onDelete: 'CASCADE' });
+Estrela.belongsToMany(Usuario, { through: Personagens_Usuarios }, { onDelete: 'CASCADE' });
     FOREIGN KEY (id_ele) REFERENCES elementos(id_ele),
     FOREIGN KEY (id_arm) REFERENCES armas(id_arm),
     FOREIGN KEY (id_tal) REFERENCES talentos(id_tal),
