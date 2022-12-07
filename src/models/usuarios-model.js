@@ -18,7 +18,7 @@ Usuario.init({
     },
     nome: DataTypes.STRING,
     senha: DataTypes.STRING,
-    //img: DataTypes.STRING,
+    img: DataTypes.STRING,
     ativo: {
         type: DataTypes.BOOLEAN,
         defaultValue: true
