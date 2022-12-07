@@ -6,6 +6,6 @@ const colecoesController = new ColecoesController();
 
 router.post('/insert', (req, res) => colecoesController.insertPersonagemColecao(req, res));
 router.get('/list/:id', (req, res) => colecoesController.listColecaoDoUsuario(req, res));
-router.delete('/delete-item/:id/personagens/:id_item', (req, res) => colecoesController.deleteItemColecao(req, res));
+router.delete('/delete/:id/personagem/:id_item', (req, res) => colecoesController.deleteItemColecao(req, res));
 
 module.exports = router;

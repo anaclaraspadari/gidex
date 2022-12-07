@@ -67,16 +67,16 @@ class ElementosController {
     async listaPersonagemPorElemento(req, res) {
         try {
             const { id } = req.params;
-            const invalido = await validateGetElemento({ id });
-            if (invalido) {
-                throw {
-                    status: 400,
-                    message: invalido.details[0].message
-                }
-            }
+            // const invalido = await validateGetElemento({ id });
+            // if (invalido) {
+            //     throw {
+            //         status: 400,
+            //         message: invalido.details[0].message
+            //     }
+            // }
             const personagens = await Personagem.findAndCountAll({
                 where: {
-                    id: id
+                    elementoId: id
                 },
                 include: [
                     { model: Elemento }

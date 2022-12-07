@@ -45,18 +45,17 @@ class TalentosController {
     }
 
     async listaTalentos(req, res) {
-        const invalido = await validateGetTalentos(req.query)
-        if (invalido) {
-            throw {
-                status: 400,
-                message: invalido.details[0].message
-            }
-        }
+        // const invalido = await validateGetTalentos(req.query)
+        // if (invalido) {
+        //     throw {
+        //         status: 400,
+        //         message: invalido.details[0].message
+        //     }
+        // }
         try {
-            const talentos = await Talento.findAndCountAll({
-                limit: 10,
-                offset: 0
-            })
+            const talentos = await Talento.findAndCountAll(
+                // {limit: 10, offset: 0}
+            )
             res.status(200).json(talentos);
         } catch (err) {
             return res.status(400).json({ err });
@@ -66,16 +65,16 @@ class TalentosController {
     async listaPersonagemPorTalento(req, res) {
         try {
             const { id } = req.params;
-            const invalido = await validateGetTalento({ id });
-            if (invalido) {
-                throw {
-                    status: 400,
-                    message: invalido.details[0].message
-                }
-            }
+            // const invalido = await validateGetTalento({ id });
+            // if (invalido) {
+            //     throw {
+            //         status: 400,
+            //         message: invalido.details[0].message
+            //     }
+            // }
             const personagens = await Personagem.findAndCountAll({
                 where: {
-                    id: id
+                    talentoId: id
                 },
                 include: [
                     { model: Talento }
