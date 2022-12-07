@@ -1,6 +1,6 @@
 const {Sequelize}=require('sequelize');
 
-const sequelizeCon=new Sequelize('postgresql://postgres:sVMBUxzlIYerzlOmVUnD@containers-us-west-83.railway.app:6484/railway',{
+const sequelizeCon=new Sequelize("postgresql://postgres:CRNaqriyP29ZFvmRgTsR@containers-us-west-91.railway.app:6071/railway",{
     dialectOptions: {
         ssl: {
             require: true,

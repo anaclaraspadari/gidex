@@ -32,4 +32,4 @@ Estrela.belongsToMany(Usuario, {through: Personagens_Usuarios}, {onDelete: 'CASC
 Personagem.belongsToMany(Usuario, {through: colecao}, {onDelete: 'CASCADE'});
 Usuario.belongsToMany(Personagem, {through: colecao}, {onDelete: 'CASCADE'});
 
-//sequelizeCon.sync();
+sequelizeCon.sync();
