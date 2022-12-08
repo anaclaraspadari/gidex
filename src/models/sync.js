@@ -14,8 +14,8 @@ Elemento.hasMany(Personagem, { onDelete: 'CASCADE' });
 Estrela.belongsTo(Usuario);
 Usuario.hasMany(Estrela, { onDelete: 'CASCADE' });
 
-Personagem_Usuario.belongsTo(Estrela);
-Estrela.hasMany(Personagem_Usuario, { onDelete: 'CASCADE' });
+Estrela.belongsTo(Personagem_Usuario);
+Personagem_Usuario.hasMany(Estrela, { onDelete: 'CASCADE' });
 
 Personagem.belongsTo(Talento);
 Talento.hasMany(Personagem, { onDelete: 'CASCADE' });
@@ -29,4 +29,4 @@ Nacao.hasMany(Personagem, { onDelete: 'CASCADE' })
 Personagem.belongsToMany(Usuario, { through: Personagem_Usuario }, { onDelete: 'CASCADE' });
 Usuario.belongsToMany(Personagem, { through: Personagem_Usuario }, { onDelete: 'CASCADE' });
 
-//sequelizeCon.sync();
+//sequelizeCon.sync({ force: true });
