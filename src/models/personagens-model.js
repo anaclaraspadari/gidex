@@ -25,4 +25,4 @@ Personagem.init({
 //const colecao = sequelizeCon.define('colecao', {}, { timestamps: false });
 
 
-module.exports = { Personagem, colecao };
+module.exports = { Personagem };
