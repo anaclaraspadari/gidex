@@ -109,46 +109,34 @@ class UsuariosController {
     }
 
 
-    async insertPersonageUsuario(req, res){
-        const {id_user}=req.user;
+    async insertPersonagemUsuario(req, res){
         const peruserBody=req.body;
         const ex={
             img: peruserBody.img,
-            usuarioEmail: id_user,
+            usuarioEmail: peruserBody.usuarioEmail,
             personagemId: peruserBody.personagemId
         }
-        await colecao.create(ex);
-        return res.status(200).json({ex});
-    }
+        console.log(ex);
+        await Personagens_Usuarios.create(ex);
+        return res.status(200).json(ex);
+
+        } catch (err) {
+            return res.status(500).json({ msg: err.message });
+        }
+    
 
     async listPersonagemUsuario(req, res){
-        try{
-            const personagemUsuario=await Personagens_Usuarios.findAll({
-                where: {
-                    usuarioEmail: req.params
-                },
-                include:[
-                    {
-                        model: Personagem,
-                        through: {
-                            attributes: [nome]
-                        }
-                    }
-                ]
-            });
-            res.status(200).json(personagemUsuario);
-        }catch(err){
-            return res.status(400).json({err});
+        try {
+            const personagens = await Personagens_Usuarios.findAndCountAll(req.body)
+            res.status(200).json(personagens);
+        } catch (err) {
+            return res.status(400).json({ err });
         }
     }
 
     async deletePersonagemUsuario(req, res){
-        Personagens_Usuarios.destroy({
-            where:{
-                usuarioEmail: req.user,
-                personagemId: req.params.id_item
-            }
-        }).then(function(deleted){
+        const { id } = req.params;
+        Personagens_Usuarios.destroy({id}).then(function(deleted){
             if(deleted===1){
                 res.status(200).json({msg: "Personagem deletado da colecao"});
             }else{

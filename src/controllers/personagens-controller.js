@@ -71,8 +71,8 @@ class ArmasController {
                     { model: Nacao },
                     { model: Talento }
                 ],
-                limit: 10,
-                offset: 0
+                //limit: 10,
+                //offset: 0
             });
             res.status(200).json(personagem);
         } catch (err) {
@@ -96,8 +96,8 @@ class ArmasController {
                     { model: Nacao },
                     { model: Talento }
                 ],
-                limit: 10,
-                offset: 0
+                //limit: 10,
+                //offset: 0
             })
             res.status(200).json(personagens);
         } catch (err) {

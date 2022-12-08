@@ -34,7 +34,7 @@ Usuario.init({
     updatedAt: false
 });
 
-const Personagem_Usuario = sequelizeCon.define('Personagens_Usuarios', {
+const Personagens_Usuarios = sequelizeCon.define('Personagens_Usuarios', {
     id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
@@ -49,4 +49,4 @@ const Personagem_Usuario = sequelizeCon.define('Personagens_Usuarios', {
 
 
 //sequelizeCon.sync({ force: true });
-module.exports = { Usuario, Personagem_Usuario };
+module.exports = { Usuario, Personagens_Usuarios };
