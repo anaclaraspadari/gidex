@@ -34,7 +34,7 @@ const validateGetArma=async(arma)=>{
     if (validacao.error) {
         return validacao.error;
     }
-    const armaExiste=await Arma.findByPk(arma);
+    const armaExiste=await Arma.findOne({where:{id: arma.id}});
     if(!armaExiste){
         return {details:[{message:"Esta arma não existe"}]}
     }

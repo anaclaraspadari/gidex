@@ -1,5 +1,5 @@
 const { Nacao } = require('../models/nacoes-model')
-const { validateNacao, validateGetNacoes } = require('../validators/nacoes-validator');
+const { validateNacao, validateGetNacao, validateGetNacoes } = require('../validators/nacoes-validator');
 const { Personagem } = require('../models/personagens-model');
 
 class NacoesController {
@@ -28,18 +28,15 @@ class NacoesController {
     }
 
     async detail(req, res) {
-
-        const { id } = req.params;
-        /*const { nome } = req.query;
-        const invalido = await validateGetNacoes(id, { nome });
-        if (invalido) {
-            throw {
-                status: 400,
-                message: invalido.details[0].message
-            }
-        }*/
         try {
-
+            const { id } = req.params;
+            const invalido = await validateGetNacao({id});
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
+                }
+            }
             const nacao = await Nacao.findByPk(id)
             res.status(200).json(nacao);
         } catch (err) {
@@ -69,13 +66,13 @@ class NacoesController {
     async listaPersonagemPorNacao(req, res) {
         try {
             const { id } = req.params;
-            // const invalido = await validateGetNacao({ id });
-            // if (invalido) {
-            //     throw {
-            //         status: 400,
-            //         message: invalido.details[0].message
-            //     }
-            // }
+            const invalido = await validateGetNacao({ id });
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
+                }
+            }
             const personagens = await Personagem.findAndCountAll({
                 where: {
                     nacaoId: id

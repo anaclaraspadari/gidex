@@ -42,7 +42,7 @@ const validateGetPersonagem=async(personagem)=>{
     if (validacao.error) {
         return validacao.error;
     }
-    const personagemExiste=await Personagem.findByPk(personagem);
+    const personagemExiste=await Personagem.findOne({where:{id: personagem.id}});
     if(!personagemExiste){
         return {details:[{message:"Este personagem não existe"}]}
     }

@@ -34,7 +34,7 @@ const validateGetElemento=async(elemento)=>{
     if (validacao.error) {
         return validacao.error;
     }
-    const elementoExiste=await Elemento.findByPk(elemento);
+    const elementoExiste=await Elemento.findOne({where:{id: elemento.id}});
     if(!elementoExiste){
         return {details:[{message:"Este elemento não existe"}]}
     }

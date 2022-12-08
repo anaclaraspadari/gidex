@@ -1,5 +1,5 @@
 const { Personagem } = require('../models/personagens-model');
-const { validatePersonagem, validateGetPersonagens } = require("../validators/personagens-validator");
+const { validatePersonagem, validateGetPersonagem, validateGetPersonagens } = require("../validators/personagens-validator");
 const { validateGetArma } = require('../validators/armas-validator');
 const { validateGetElemento } = require('../validators/elementos-validator');
 const { validateGetNacao } = require('../validators/nacoes-validator');
@@ -57,13 +57,13 @@ class ArmasController {
     async detail(req, res) {
         try {
             const { id } = req.params;
-            /*const invalido = await validateGetPersonagem({ id });
+            const invalido = await validateGetPersonagem({ id });
             if (invalido) {
                 throw {
                     status: 400,
                     message: invalido.details[0].message
                 }
-            }*/
+            }
             const personagem = await Personagem.findByPk(id, {
                 include: [
                     { model: Arma },

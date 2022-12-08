@@ -31,14 +31,14 @@ class ArmasController {
     async detail(req, res) {
         try {
             const { id } = req.params;
-            /*
+            
             const invalido = await validateGetArma({ id });
             if (invalido) {
                 throw {
                     status: 400,
                     message: invalido.details[0].message
                 }
-            }*/
+            }
 
             const arma = await Arma.findByPk(id);
             res.status(200).json(arma);
@@ -70,13 +70,13 @@ class ArmasController {
     async listaPersonagemPorArma(req, res) {
         try {
             const { id } = req.params;
-            // const invalido = await validateGetArma({ id });
-            // if (invalido) {
-            //     throw {
-            //         status: 400,
-            //         message: invalido.details[0].message
-            //     }
-            // }
+            const invalido = await validateGetArma({ id });
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
+                }
+            }
             const personagens = await Personagem.findAndCountAll({
                 where: {
                     armaId: id

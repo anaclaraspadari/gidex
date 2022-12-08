@@ -31,13 +31,13 @@ class ElementosController {
     async detail(req, res) {
         try {
             const { id } = req.params;
-            /*const invalido = await validateGetElemento({ id });
+            const invalido = await validateGetElemento({ id });
             if (invalido) {
                 throw {
                     status: 400,
                     message: invalido.details[0].message
                 }
-            }*/
+            }
             const elemento = await Elemento.findByPk(id)
             res.status(200).json(elemento);
         } catch (err) {
@@ -67,13 +67,13 @@ class ElementosController {
     async listaPersonagemPorElemento(req, res) {
         try {
             const { id } = req.params;
-            // const invalido = await validateGetElemento({ id });
-            // if (invalido) {
-            //     throw {
-            //         status: 400,
-            //         message: invalido.details[0].message
-            //     }
-            // }
+            const invalido = await validateGetElemento({ id });
+            if (invalido) {
+                throw {
+                    status: 400,
+                    message: invalido.details[0].message
+                }
+            }
             const personagens = await Personagem.findAndCountAll({
                 where: {
                     elementoId: id

@@ -34,7 +34,7 @@ const validateGetTalento=async(talento)=>{
     if (validacao.error) {
         return validacao.error;
     }
-    const talentoExiste=await Talento.findByPk(talento);
+    const talentoExiste=await Talento.findOne({where:{id: talento.id}});
     if(!talentoExiste){
         return {details:[{message:"Este talento não existe"}]}
     }

@@ -35,7 +35,7 @@ const validateGetNacao=async(nacao)=>{
     if (validacao.error) {
         return validacao.error;
     }
-    const nacaoExiste=await Nacao.findByPk(nacao);
+    const nacaoExiste=await Nacao.findOne({where:{id: nacao.id}});
     if(!nacaoExiste){
         return {details:[{message:"Esta nacao não existe"}]}
     }
