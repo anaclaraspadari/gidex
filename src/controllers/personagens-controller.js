@@ -71,8 +71,9 @@ class ArmasController {
                     { model: Nacao },
                     { model: Talento }
                 ],
-                //limit: 10,
-                //offset: 0
+                order: [
+                    ["id", "ASC"]
+                ]
             });
             res.status(200).json(personagem);
         } catch (err) {

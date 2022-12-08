@@ -4,14 +4,15 @@ const { Estrela } = require('../models/estrelas-model');
 class EstrelasController{
     constructor(){}
 
+
     async favoritarItem(req, res){
         try{
-            const {id}=req.params;
             const starBody=req.body;
             const ex={
-                usuarioEmail: starBody.user.email,
-                PersonagemUsuarioId: id
+                usuarioEmail: starBody.usuarioEmail,
+                PersonagemUsuarioId: starBody.PersonagemUsuarioId
             }
+            console.log(ex);
             await Estrela.create(ex);
             return res.status(200).json(ex);
         }catch(err){
@@ -22,8 +23,7 @@ class EstrelasController{
     async desfavoritarItem(req, res){
         Estrela.destroy({
             where:{
-                usuarioEmail: req.params.id,
-                PersonagemUsuarioId: req.user.email
+                id: req.params.id
             }
         }).then(function(deleted){
             if(deleted===1){

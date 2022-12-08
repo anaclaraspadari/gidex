@@ -127,7 +127,8 @@ class UsuariosController {
 
     async listPersonagemUsuario(req, res){
         try {
-            const personagens = await Personagens_Usuarios.findAndCountAll(req.body)
+            const { id } = req.params;
+            const personagens = await Personagens_Usuarios.findByPk(id)
             res.status(200).json(personagens);
         } catch (err) {
             return res.status(400).json({ err });
@@ -135,8 +136,11 @@ class UsuariosController {
     }
 
     async deletePersonagemUsuario(req, res){
-        const { id } = req.params;
-        Personagens_Usuarios.destroy({id}).then(function(deleted){
+        Personagens_Usuarios.destroy({
+            where:{
+                id: req.params.id
+            }
+        }).then(function(deleted){
             if(deleted===1){
                 res.status(200).json({msg: "Personagem deletado da colecao"});
             }else{

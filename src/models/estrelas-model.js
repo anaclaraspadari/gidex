@@ -3,6 +3,7 @@ const { sequelizeCon } = require('../config/db-config');
 
 class Estrela extends Model {}
 
+
 Estrela.init({
     id: {
         type: DataTypes.INTEGER,
