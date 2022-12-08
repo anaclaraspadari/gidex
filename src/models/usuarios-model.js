@@ -19,7 +19,7 @@ Usuario.init({
     nome: DataTypes.STRING,
     senha: DataTypes.STRING,
     img: {
-        type:  DataTypes.STRING,
+        type:  DataTypes.TEXT,
         defaultValue: null
     },
     ativo: {

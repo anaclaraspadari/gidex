@@ -10,6 +10,7 @@ class UsuariosController {
     async create(req, res) {
 
         const userBody = req.body;
+
         const senha = bcrypt.hashSync(userBody.senha, 10);
 
         try {
@@ -29,8 +30,15 @@ class UsuariosController {
             }
 
             await Usuario.create(usuario);
-            console.log(usuario);
-            return res.status(200).json(usuario);
+            
+            
+            const meuJwt = jwt.sign(usuario.email, 'SECRET NAO PODERIA ESTAR HARDCODED K');
+
+            delete usuario.senha;
+
+            delete usuario.img;
+
+            return res.status(200).json({...usuario, token: meuJwt});
 
         } catch (err) {
             return res.status(500).json({ msg: err.message });
@@ -53,7 +61,7 @@ class UsuariosController {
             }*/
 
             const user = await Usuario.findByPk(email, {
-                attributes: ['email','nome', "senha"]
+                attributes: ['email','nome', "senha", 'img']
             });
 
             if(!user) {
