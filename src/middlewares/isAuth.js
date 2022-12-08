@@ -1,18 +1,38 @@
 const jwt = require('jsonwebtoken')
 
-const isAuth  = (req, res, next) => {
+const { Usuario } = require('../models/usuarios-model')
+
+const isAuth  = async(req, res, next) => {
     
     // verifica se token existe
-    const token = req.headers['authorization'];
+    const token = req.headers.authorization;
+
     if (!token) {
         return res.status(401).json({msg:  "missing authorization token"}); 
     }
 
-    // validar o token
-    const tokenValidado = jwt.verify(token, "SECRET NAO PODERIA ESTAR HARDCODED");
-    console.log({ tokenValidado })
+    console.log(token)
 
-    req.user = tokenValidado;
+    // validar o token
+    try{
+
+        const tokenValidado = jwt.verify(token, 'SECRET NAO PODERIA ESTAR HARDCODED K');
+
+    } catch(err) {
+        console.log(err)
+        return res.status(401).json({msg:  "token invalido"}); 
+    }
+
+    const tokenValidado = jwt.verify(token, 'SECRET NAO PODERIA ESTAR HARDCODED K');
+
+    const user = await Usuario.findByPk(tokenValidado, {
+        attributes: ['email','nome', "senha", 'img']
+    });
+
+    if(!user) return res.status(401).json({msg:  "Usuario não encontrado"}); 
+
+    res.locals.user = user;
+  
     next();
 }
 
