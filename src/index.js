@@ -40,6 +40,9 @@ app.use('/talentos', talentosRouter);
 const personagensRouter = require('./routes/personagens-route');
 app.use('/personagens', personagensRouter);
 
+const estrelasRouter = require('./routes/estrelas-route');
+app.use('/estrelas', estrelasRouter);
+
 // const colecoesRouter = require('./routes/colecoes-route');
 // app.use('/colecoes', colecoesRouter);
 
