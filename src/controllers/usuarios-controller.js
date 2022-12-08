@@ -1,4 +1,5 @@
 const { Usuario, Personagens_Usuarios } = require('../models/usuarios-model')
+const { Personagem }=require('./../models/personagens-model');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { validateUsuario, validateAuthUsuario, validateUpdateUsuario, validateGetListaUsuarios } = require('../validators/usuarios-validator');
@@ -108,22 +109,56 @@ class UsuariosController {
     }
 
 
-    async deletePersonagensUsuarios(req, res) {
+    async insertPersonageUsuario(req, res){
+        const {id_user}=req.user;
+        const peruserBody=req.body;
+        const ex={
+            img: peruserBody.img,
+            usuarioEmail: id_user,
+            personagemId: peruserBody.personagemId
+        }
+        await colecao.create(ex);
+        return res.status(200).json({ex});
+    }
+
+    async listPersonagemUsuario(req, res){
+        try{
+            const personagemUsuario=await Personagens_Usuarios.findAll({
+                where: {
+                    usuarioEmail: req.params
+                },
+                include:[
+                    {
+                        model: Personagem,
+                        through: {
+                            attributes: [nome]
+                        }
+                    }
+                ]
+            });
+            res.status(200).json(personagemUsuario);
+        }catch(err){
+            return res.status(400).json({err});
+        }
+    }
+
+    async deletePersonagemUsuario(req, res){
         Personagens_Usuarios.destroy({
-            where: {
-                usuarioEmail: req.params.email,
-                personagemId: req.params.id
+            where:{
+                usuarioEmail: req.user,
+                personagemId: req.params.id_item
             }
-        }).then(function(deleted) {
-            if (deleted === 1) {
-                res.status(200).json({ msg: "Personagem Deletado" });
-            } else {
+        }).then(function(deleted){
+            if(deleted===1){
+                res.status(200).json({msg: "Personagem deletado da colecao"});
+            }else{
                 res.status(404).json({ msg: "Falha ao deletar" });
             }
         }).catch(err => {
             res.status(500).json("Nao foi possivel concluir a operacao");
         })
     }
+
 }
 
 

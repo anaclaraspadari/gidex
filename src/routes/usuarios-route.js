@@ -9,6 +9,8 @@ router.post('/auth', (req, res) => usersController.auth(req, res));
 
 router.get('/list', (req, res) => usersController.list(req, res));
 router.get('/profile', (req, res) => usersController.profile(req, res));
-router.get('/delete/:id_user/:id_peruser', (req, res) => usersController.prodeletePersonagensUsuariosfile(req, res));
+router.post('/insert', (req, res) => usersController.insertPersonagemUsuario(req, res));
+router.get('/list/:id', (req, res) => usersController.listPersonagemUsuario(req, res));
+router.delete('/delete/:id/personagem/:id_item', (req, res) => usersController.deletePersonagemUsuario(req, res));
 
 module.exports = router;

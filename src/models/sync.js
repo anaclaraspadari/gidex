@@ -1,5 +1,5 @@
 const { Elemento } = require("./elementos-model");
-const { Personagem, colecao } = require("./personagens-model");
+const { Personagem } = require("./personagens-model");
 const { Arma } = require('./armas-model');
 const { Nacao } = require('./nacoes-model');
 const { Talento } = require('./talentos-model');
@@ -26,7 +26,7 @@ Arma.hasMany(Personagem, { onDelete: 'CASCADE' });
 Personagem.belongsTo(Nacao);
 Nacao.hasMany(Personagem, { onDelete: 'CASCADE' })
 
-Personagem.belongsToMany(Usuario, { through: colecao }, { onDelete: 'CASCADE' });
-Usuario.belongsToMany(Personagem, { through: colecao }, { onDelete: 'CASCADE' });
+Personagem.belongsToMany(Usuario, { through: Personagens_Usuarios }, { onDelete: 'CASCADE' });
+Usuario.belongsToMany(Personagem, { through: Personagens_Usuarios }, { onDelete: 'CASCADE' });
 
-//sequelizeCon.sync();
+sequelizeCon.sync();

@@ -22,7 +22,7 @@ Personagem.init({
     updatedAt: false
 });
 
-const colecao = sequelizeCon.define('colecao', {}, { timestamps: false });
+//const colecao = sequelizeCon.define('colecao', {}, { timestamps: false });
 
 
 module.exports = { Personagem, colecao };
