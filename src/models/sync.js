@@ -29,4 +29,4 @@ Nacao.hasMany(Personagem, { onDelete: 'CASCADE' })
 Personagem.belongsToMany(Usuario, { through: Personagem_Usuario }, { onDelete: 'CASCADE' });
 Usuario.belongsToMany(Personagem, { through: Personagem_Usuario }, { onDelete: 'CASCADE' });
 
-sequelizeCon.sync();
+//sequelizeCon.sync();
