@@ -34,11 +34,14 @@ Usuario.init({
     updatedAt: false
 });
 
-const Personagens_Usuarios = sequelizeCon.define('Personagens_Usuarios', {
+const Personagem_Usuario = sequelizeCon.define('Personagens_Usuarios', {
     id: {
-        type: DataTypes.STRING,
+        type: DataTypes.INTEGER,
         primaryKey: true,
-        autoIncrement: false
+        autoIncrement: true
+    },
+    img: {
+        type: DataTypes.STRING
     }
 }, { timestamps: false });
 
@@ -46,4 +49,4 @@ const Personagens_Usuarios = sequelizeCon.define('Personagens_Usuarios', {
 
 
 //sequelizeCon.sync({ force: true });
-module.exports = { Usuario, Personagens_Usuarios };
+module.exports = { Usuario, Personagem_Usuario };
