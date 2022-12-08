@@ -29,7 +29,7 @@ const isAuth  = async(req, res, next) => {
         attributes: ['email','nome', "senha", 'img']
     });
 
-    if(!user) return res.status(401).json({msg:  "Usuario não encontrado"}); 
+    if(!user) return res.status(401).json({msg:  "Usuario não encontrado "}); 
 
     res.locals.user = user;
   
